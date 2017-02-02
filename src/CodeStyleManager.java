@@ -1,5 +1,3 @@
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.project.Project;
 
@@ -12,20 +10,16 @@ import java.util.ArrayList;
 /**
  * Created by dionsegijn on 2/2/17.
  */
-public class Sync extends AnAction {
+public class CodeStyleManager {
 
-    private static final String projectLevelCodestyleFolder = "/.codestyles";
+    private String projectBasePath;
 
-    private static String projectBasePath;
+    CodeStyleManager(String projectBasePath) {
+        this.projectBasePath = projectBasePath;
+    }
 
-    @Override
-    public void actionPerformed(AnActionEvent e) {
-        final Project project = e.getProject();
-        if (project == null) {
-            return;
-        }
-        // Set project base path for getCodestylePath
-        projectBasePath = project.getBasePath();
+    void sync() {
+        if(projectBasePath == null) return;
 
         if(!createFolder(getCodestylePath())) {
             checkForExistingCodestyles();
@@ -33,6 +27,7 @@ public class Sync extends AnAction {
     }
 
     private String getCodestylePath() {
+        String projectLevelCodestyleFolder = "/.codestyles";
         return projectBasePath + projectLevelCodestyleFolder;
     }
 
@@ -79,5 +74,4 @@ public class Sync extends AnAction {
         int lastIndex = fileName.lastIndexOf('.');
         return lastIndex > 0 && "xml".equalsIgnoreCase(fileName.substring(lastIndex + 1));
     }
-
 }
