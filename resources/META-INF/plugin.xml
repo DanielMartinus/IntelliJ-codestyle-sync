@@ -5,13 +5,19 @@
   <vendor email="danielsegijn@gmail.com" url="http://dionsegijn.nl">Dion Segijn</vendor>
 
   <description><![CDATA[
-      Plugin syncing your codestyle with the current IDE from the codestyle folder.<br>
-      <em>most HTML tags may be used</em>
+      Plugin generating the .codeStyles folder in the top level of your project<br>
+      Add any codestyle file to this folder to sync it automatically with your IntelliJ based IDE
+      Share the CodeStyle through git among your team and when updated in the repository your team
+      automatically will sync with the new code style.
+
+      <br><br>
+      The plugin doesn't take care of automatically formatting your project's files after replacing
+      the new codestyle
     ]]></description>
 
   <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+      Version: 1.0<br>
+      <em>Release of the initial version of the CodeStyle plugin</em>
     ]]>
   </change-notes>
 

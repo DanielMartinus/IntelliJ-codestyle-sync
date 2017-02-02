@@ -2,9 +2,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.diagnostic.Logger;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Sync extends AnAction {
 
-    private static final String folderName = "/.codestyles";
+    private static final String projectLevelCodestyleFolder = "/.codestyles";
 
     private static String projectBasePath;
 
@@ -35,7 +33,7 @@ public class Sync extends AnAction {
     }
 
     private String getCodestylePath() {
-        return projectBasePath + folderName;
+        return projectBasePath + projectLevelCodestyleFolder;
     }
 
     private boolean createFolder(String path) {
