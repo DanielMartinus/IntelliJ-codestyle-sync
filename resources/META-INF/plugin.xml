@@ -6,9 +6,9 @@
 
   <description><![CDATA[
       Plugin generating the .codeStyles folder in the top level of your project<br>
-      Add any code style file to this folder to sync it automatically with your IntelliJ based IDE
-      Share the code style through git among your team and when updated in the repository your team
-      automatically will sync with the new code style.
+      Add any code style file to this folder to sync it automatically with your IntelliJ based IDE<br>
+      Push the codestyle folder with contents to your code repository. If your team members have this
+      plugin installed they their code style will automatically update for every new version.
 
       <br><br>
       The plugin doesn't take care of automatically formatting your project's files after replacing
