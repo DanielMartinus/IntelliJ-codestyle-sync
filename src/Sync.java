@@ -38,12 +38,6 @@ public class Sync extends AnAction {
         return projectBasePath + folderName;
     }
 
-    private void showMessageBox(String text) {
-        JPanel panel = new JPanel();
-        panel.add(new JLabel(text));
-        JOptionPane.showMessageDialog(null,panel,"Information",JOptionPane.INFORMATION_MESSAGE);
-    }
-
     private boolean createFolder(String path) {
         return new File(path).mkdirs();
     }
@@ -53,7 +47,6 @@ public class Sync extends AnAction {
 
         // File is not a directory
         if(files == null) {
-            showMessageBox("No directory found");
             return;
         }
 
@@ -61,7 +54,6 @@ public class Sync extends AnAction {
         for (File file : files) {
             if (file.isFile() && isXMLFileExtension(file.getName())) {
                 copyFiles.add(file);
-                showMessageBox("Found XML file: " + file.getName());
             }
         }
         copyFiles(copyFiles);
@@ -78,7 +70,6 @@ public class Sync extends AnAction {
                 e.printStackTrace();
             }
         }
-
     }
 
     private static void copyFile(File from, File to) throws IOException {
