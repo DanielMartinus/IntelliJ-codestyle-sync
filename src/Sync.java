@@ -1,22 +1,21 @@
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.diagnostic.Logger;
 
-import com.intellij.openapi.ui.DialogWrapper;
-import junit.framework.Test;
-import org.jetbrains.annotations.Nullable;
-
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 
 /**
  * Created by dionsegijn on 2/2/17.
  */
 public class Sync extends AnAction {
 
-    private static final Logger log = Logger.getInstance(Sync.class);
     private static final String folderName = "/.codestyles";
 
     private static String projectBasePath;
@@ -27,10 +26,10 @@ public class Sync extends AnAction {
         if (project == null) {
             return;
         }
-        // Set for getCodestylePath
+        // Set project base path for getCodestylePath
         projectBasePath = project.getBasePath();
 
-        if(!checkForPluginFolder()) {
+        if(!createFolder(getCodestylePath())) {
             checkForExistingCodestyles();
         }
     }
@@ -45,8 +44,8 @@ public class Sync extends AnAction {
         JOptionPane.showMessageDialog(null,panel,"Information",JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private boolean checkForPluginFolder() {
-        return new File(getCodestylePath()).mkdirs();
+    private boolean createFolder(String path) {
+        return new File(path).mkdirs();
     }
 
     private void checkForExistingCodestyles() {
@@ -58,11 +57,32 @@ public class Sync extends AnAction {
             return;
         }
 
+        ArrayList<File> copyFiles = new ArrayList<>();
         for (File file : files) {
             if (file.isFile() && isXMLFileExtension(file.getName())) {
+                copyFiles.add(file);
                 showMessageBox("Found XML file: " + file.getName());
             }
         }
+        copyFiles(copyFiles);
+    }
+
+    private void copyFiles(ArrayList<File> files) {
+        String configPath = PathManager.getConfigPath();
+        createFolder(configPath + "/codestyles");
+
+        for(File file : files) {
+            try {
+                copyFile(file, new File(configPath + "/codestyles/" + file.getName()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    private static void copyFile(File from, File to) throws IOException {
+        Files.copy( from.toPath(), to.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 
     private boolean isXMLFileExtension(String fileName) {
@@ -70,6 +90,5 @@ public class Sync extends AnAction {
         int lastIndex = fileName.lastIndexOf('.');
         return lastIndex > 0 && "xml".equalsIgnoreCase(fileName.substring(lastIndex + 1));
     }
-
 
 }
