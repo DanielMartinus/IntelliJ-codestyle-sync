@@ -71,7 +71,7 @@ public class Sync extends AnAction {
     }
 
     private static void copyFile(File from, File to) throws IOException {
-        Files.copy( from.toPath(), to.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(from.toPath(), to.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 
     private boolean isXMLFileExtension(String fileName) {

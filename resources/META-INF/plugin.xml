@@ -1,42 +1,36 @@
 <idea-plugin version="2">
   <id>nl.dionsegijn.codestyle.sync</id>
-  <name>CodeStyle Sync</name>
+  <name>Code Style Sync</name>
   <version>1.0</version>
-  <vendor email="danielsegijn@gmail.com" url="http://dionsegijn.nl">Dion Segijn</vendor>
+  <vendor url="https://github.com/DanielMartinus">Dion Segijn</vendor>
 
   <description><![CDATA[
       Plugin generating the .codeStyles folder in the top level of your project<br>
-      Add any codestyle file to this folder to sync it automatically with your IntelliJ based IDE
-      Share the CodeStyle through git among your team and when updated in the repository your team
+      Add any code style file to this folder to sync it automatically with your IntelliJ based IDE
+      Share the code style through git among your team and when updated in the repository your team
       automatically will sync with the new code style.
 
       <br><br>
       The plugin doesn't take care of automatically formatting your project's files after replacing
-      the new codestyle
+      the new code style
     ]]></description>
 
   <change-notes><![CDATA[
       Version: 1.0<br>
-      <em>Release of the initial version of the CodeStyle plugin</em>
+      <em>Release of the initial version of the Code Style plugin</em>
     ]]>
   </change-notes>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
   <idea-version since-build="145.0"/>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-       on how to target different products -->
-  <!-- uncomment to enable plugin in all products -->
   <depends>com.intellij.modules.lang</depends>
 
   <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
   </extensions>
 
   <actions>
-    <!-- Add your actions here -->
-    <action id="codestyle.Sync" class="Sync" text="Sync codestyle"
-            description="Find codestyle folder within project top level folder and sync codestyle files with Android Studio">
+    <action id="codestyle.Sync" class="Sync" text="Sync code style"
+            description="Find code style folder within project top level folder and sync code style files with Android Studio">
       <add-to-group group-id="ToolsMenu" anchor="first"/>
     </action>
   </actions>
