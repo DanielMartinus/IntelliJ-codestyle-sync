@@ -1,4 +1,4 @@
-# intellij codestyle sync
+## IntelliJ code style sync
 Sync your codestyle with your IntelliJ based IDE from a top level project folder and easily maintain it through git.
 
 ### Installation
